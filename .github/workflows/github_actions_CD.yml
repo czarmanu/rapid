@@ -8,7 +8,7 @@
 #The purpose of this file is to give instructions to GitHub on how to do the
 #image deployment to Docker Hub.
 #Author:
-#Cedric H. David, 2022-2024.
+#Cedric H. David, Manu Tom, 2022-2024.
 
 
 #*******************************************************************************
@@ -37,6 +37,12 @@ jobs:
 
       steps:
 
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+      # Checkout repository
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+         - name: Checkout repository
+           uses: actions/checkout@v2
+      
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Display GitHub Action-related information
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -85,6 +91,7 @@ jobs:
            uses: docker/build-push-action@v5
            with:
               context: .
+              file: ./Dockerfile
               push: true
               platforms: linux/amd64,linux/arm64
               tags: |
